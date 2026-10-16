@@ -134,8 +134,8 @@ La aplicación utiliza una paleta de tonos rosa, magenta, lila y violeta, con co
 
 ## Repositorio
 
-** Código fuente: https://github.com/Camigg023/beauty-ERP.git **
-** Despliegue: beauty-erp-gules.vercel.app **
+Código fuente: [https://github.com/Camigg023/beauty-ERP.git](https://github.com/Camigg023/beauty-ERP.git)
+Despliegue: [beauty-erp-gules.vercel.app](https://beauty-erp-gules.vercel.app)
 ---
 
 Proyecto desarrollado como aplicación de gestión de inventarios para el sector cosmético, integrando desarrollo web y modelos matemáticos de control de inventarios.

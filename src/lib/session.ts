@@ -1,4 +1,4 @@
-export const SESSION_COOKIE = 'beauty_crm_session';
+export const SESSION_COOKIE = 'beauty_erp_session';
 const enc = new TextEncoder();
 
 function getSessionSecret() {

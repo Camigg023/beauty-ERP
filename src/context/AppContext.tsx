@@ -53,7 +53,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
 
   // Cargar tema guardado
   useEffect(() => {
-    const savedTheme = localStorage.getItem('beauty_crm_theme') as 'light' | 'dark' | null;
+    const savedTheme = localStorage.getItem('beauty_erp_theme') as 'light' | 'dark' | null;
     if (savedTheme) {
       setTheme(savedTheme);
       if (savedTheme === 'dark') {
@@ -67,7 +67,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const toggleTheme = useCallback(() => {
     setTheme(prev => {
       const next = prev === 'light' ? 'dark' : 'light';
-      localStorage.setItem('beauty_crm_theme', next);
+      localStorage.setItem('beauty_erp_theme', next);
       if (next === 'dark') {
         document.documentElement.classList.add('dark');
       } else {
