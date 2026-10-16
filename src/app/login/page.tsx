@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Sparkles, Lock, Mail, ArrowRight, ShieldCheck, UserRound } from 'lucide-react';
+import { Sparkles, Lock, Mail, ArrowRight, UserRound } from 'lucide-react';
 import { LipstickIcon, BlushIcon, MascaraIcon } from '@/components/CosmeticIcons';
 import { authClient } from '@/lib/auth-client';
 
@@ -10,8 +10,8 @@ export default function LoginPage() {
   const router = useRouter();
   const [mode, setMode] = useState<'sign-in' | 'sign-up'>('sign-in');
   const [name, setName] = useState('');
-  const [email, setEmail] = useState('admin@trendybeauty.co');
-  const [password, setPassword] = useState('TrendyAdmin2026!');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -43,18 +43,7 @@ export default function LoginPage() {
         router.refresh();
         return;
       }
-
-      const res = await fetch('/api/auth', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      });
-      const data = await res.json();
-      if (data.success) {
-        router.push('/');
-      } else {
-        setError(signInError.message || data.error || 'Credenciales no válidas');
-      }
+      setError(signInError.message || 'Credenciales no válidas');
     } catch {
       setError('Error al conectar con el servidor');
     } finally {
@@ -78,11 +67,6 @@ export default function LoginPage() {
     } finally {
       setLoading(false);
     }
-  };
-
-  const handleQuickDemo = () => {
-    setEmail('admin@trendybeauty.co');
-    setPassword('TrendyAdmin2026!');
   };
 
   return (
@@ -228,23 +212,6 @@ export default function LoginPage() {
           Continuar con Google
         </button>
 
-        {/* Demo Fast Fill Badge */}
-        {mode === 'sign-in' && <div className="p-3.5 rounded-2xl bg-white/50 dark:bg-slate-900/50 border border-pink-200/50 dark:border-pink-900/30 text-center space-y-2">
-          <div className="flex items-center justify-center gap-1.5 text-xs font-semibold text-slate-600 dark:text-slate-400">
-            <ShieldCheck className="w-4 h-4 text-emerald-500" />
-            <span>Acceso Demo Autorizado</span>
-          </div>
-          <p className="text-[11px] text-slate-500 font-mono">
-            admin@trendybeauty.co / TrendyAdmin2026!
-          </p>
-          <button
-            type="button"
-            onClick={handleQuickDemo}
-            className="text-xs font-bold text-pink-600 dark:text-pink-400 hover:underline"
-          >
-            Autorrellenar credenciales
-          </button>
-        </div>}
       </div>
     </div>
   );
