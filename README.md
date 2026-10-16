@@ -135,7 +135,7 @@ La aplicación utiliza una paleta de tonos rosa, magenta, lila y violeta, con co
 ## Repositorio
 
 Código fuente: [github.com/Camigg023/beauty-crm](https://github.com/Camigg023/beauty-crm)
-Despliegue: beauty-mkm45r5o0-camigg023s-projects.vercel.app
+Despliegue: beauty-crm-gules.vercel.app
 ---
 
 Proyecto desarrollado como aplicación de gestión de inventarios para el sector cosmético, integrando desarrollo web y modelos matemáticos de control de inventarios.
