@@ -70,8 +70,8 @@ Los productos y sus valores forman parte de los datos utilizados para la demostr
 ### 1. Clonar el repositorio
 
 ```bash
-git clone https://github.com/Camigg023/beauty-crm.git
-cd beauty-crm
+git clone https://github.com/Camigg023/beauty-ERP.git
+cd beauty-erp
 ```
 
 ### 2. Instalar las dependencias
@@ -134,8 +134,8 @@ La aplicación utiliza una paleta de tonos rosa, magenta, lila y violeta, con co
 
 ## Repositorio
 
-Código fuente: https://github.com/Camigg023/beauty-ERP.git
-Despliegue: beauty-erp-gules.vercel.app
+** Código fuente: https://github.com/Camigg023/beauty-ERP.git **
+** Despliegue: beauty-erp-gules.vercel.app **
 ---
 
 Proyecto desarrollado como aplicación de gestión de inventarios para el sector cosmético, integrando desarrollo web y modelos matemáticos de control de inventarios.
