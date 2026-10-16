@@ -1,6 +1,10 @@
 export const SESSION_COOKIE = 'beauty_crm_session';
 const enc = new TextEncoder();
 
+function getSessionSecret() {
+  return process.env.BETTER_AUTH_SECRET || process.env.AUTH_SECRET;
+}
+
 function toB64Url(bytes: Uint8Array) {
   let s = '';
   bytes.forEach((b) => (s += String.fromCharCode(b)));
@@ -17,15 +21,15 @@ function hmacKey(secret: string) {
 }
 
 export async function createSessionToken(email: string): Promise<string> {
-  const secret = process.env.AUTH_SECRET;
-  if (!secret) throw new Error('AUTH_SECRET no configurado');
+  const secret = getSessionSecret();
+  if (!secret) throw new Error('BETTER_AUTH_SECRET o AUTH_SECRET no configurado');
   const payload = toB64Url(enc.encode(JSON.stringify({ sub: email, exp: Date.now() + 7 * 24 * 3600 * 1000 })));
   const sig = await crypto.subtle.sign('HMAC', await hmacKey(secret), enc.encode(payload));
   return `${payload}.${toB64Url(new Uint8Array(sig))}`;
 }
 
 export async function verifySessionToken(token?: string): Promise<boolean> {
-  const secret = process.env.AUTH_SECRET;
+  const secret = getSessionSecret();
   if (!secret || !token) return false;
   const [payload, sig] = token.split('.');
   if (!payload || !sig) return false;

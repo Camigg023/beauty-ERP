@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
   try {
     const adminEmail = process.env.ADMIN_EMAIL || 'admin@trendybeauty.co';
     const adminPassword = process.env.ADMIN_PASSWORD;
-    if (!adminPassword || !process.env.AUTH_SECRET) {
+    if (!adminPassword || !(process.env.BETTER_AUTH_SECRET || process.env.AUTH_SECRET)) {
       return NextResponse.json({ success: false, error: 'Servidor sin configurar' }, { status: 500 });
     }
 

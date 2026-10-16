@@ -35,7 +35,7 @@ import { LipstickIcon, BlushIcon, MascaraIcon } from '@/components/CosmeticIcons
 import { Product } from '@/types';
 
 export default function DashboardPage() {
-  const { products, notifications, openQuickOrder, setNotificationModalOpen } = useApp();
+  const { products, notifications, dataError, openQuickOrder, setNotificationModalOpen } = useApp();
 
   // KPIs globales
   const totalUnits = products.reduce((sum, p) => sum + p.currentStock, 0);
@@ -118,6 +118,14 @@ export default function DashboardPage() {
         />
 
         <div className="px-4 sm:px-8 py-6 space-y-8 max-w-7xl mx-auto w-full">
+          {dataError && (
+            <div
+              role="alert"
+              className="rounded-2xl border border-rose-300 bg-rose-50 px-4 py-3 text-sm font-semibold text-rose-800 dark:border-rose-900 dark:bg-rose-950/40 dark:text-rose-200"
+            >
+              No se pudieron cargar los datos del inventario: {dataError}. Verifica la sesión y la conexión con la base de datos.
+            </div>
+          )}
           {/* BANNER DE ALARMA SI EXISTEN ALERTAS ACTIVAS */}
           {activeAlerts.length > 0 && (
             <div className={`p-4 sm:p-5 rounded-3xl border shadow-lg flex flex-col md:flex-row items-start md:items-center justify-between gap-4 transition-all ${

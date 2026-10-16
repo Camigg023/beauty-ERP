@@ -1,6 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useEffect, useState, useCallback } from 'react';
+import { usePathname } from 'next/navigation';
 import { NotificationAlert, Product } from '@/types';
 
 interface ToastState {
@@ -17,6 +18,7 @@ interface AppContextType {
   unreadAlertsCount: number;
   criticalAlertsCount: number;
   isLoading: boolean;
+  dataError: string | null;
   refreshData: () => Promise<void>;
   toasts: ToastState[];
   showToast: (message: string, type?: 'success' | 'error' | 'info') => void;
@@ -35,10 +37,12 @@ interface AppContextType {
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
   const [products, setProducts] = useState<Product[]>([]);
   const [notifications, setNotifications] = useState<NotificationAlert[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [dataError, setDataError] = useState<string | null>(null);
   const [toasts, setToasts] = useState<ToastState[]>([]);
   const [quickOrderModal, setQuickOrderModal] = useState<{
     isOpen: boolean;
@@ -86,6 +90,8 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const refreshData = useCallback(async () => {
+    setIsLoading(true);
+    setDataError(null);
     try {
       const [prodRes, notifRes] = await Promise.all([
         fetch('/api/products'),
@@ -94,22 +100,27 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       const prodJson = await prodRes.json();
       const notifJson = await notifRes.json();
 
-      if (prodJson.success) {
-        setProducts(prodJson.data);
+      if (!prodRes.ok || !prodJson.success) {
+        throw new Error(prodJson.error || 'No se pudieron cargar los productos');
       }
-      if (notifJson.success) {
-        setNotifications(notifJson.data);
+      if (!notifRes.ok || !notifJson.success) {
+        throw new Error(notifJson.error || 'No se pudieron cargar las notificaciones');
       }
-    } catch (e) {
-      console.error('Error refreshing app data:', e);
+      setProducts(prodJson.data);
+      setNotifications(notifJson.data);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'Error al cargar los datos';
+      console.error('Error refreshing app data:', error);
+      setDataError(message);
     } finally {
       setIsLoading(false);
     }
   }, []);
 
   useEffect(() => {
+    if (pathname === '/login') return;
     refreshData();
-  }, [refreshData]);
+  }, [pathname, refreshData]);
 
   const openQuickOrder = useCallback((product: Product, quantity?: number) => {
     setQuickOrderModal({
@@ -136,6 +147,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         unreadAlertsCount,
         criticalAlertsCount,
         isLoading,
+        dataError,
         refreshData,
         toasts,
         showToast,
