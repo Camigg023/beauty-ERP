@@ -71,7 +71,7 @@ export default function VentasPage() {
           productId: selectedProduct.id,
           quantity,
           channel,
-          customerName: customerName || 'Cliente Mostrador Trendy',
+          customerName: customerName || 'Cliente Mostrador Beauty',
         }),
       });
       const data = await res.json();

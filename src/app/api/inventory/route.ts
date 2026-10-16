@@ -5,7 +5,7 @@ export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
     const productId = searchParams.get('productId') || undefined;
-    const kardex = getKardex(productId);
+    const kardex = await getKardex(productId);
     return NextResponse.json({ success: true, data: kardex });
   } catch (error: any) {
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });
@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
         { status: 400 }
       );
     }
-    const result = recordInventoryAdjustment({
+    const result = await recordInventoryAdjustment({
       productId,
       newStock: Number(newStock),
       reason: reason || 'Ajuste manual de inventario',

@@ -3,7 +3,7 @@ import { createPurchaseOrder, getPurchaseOrders, receivePurchaseOrder } from '@/
 
 export async function GET() {
   try {
-    const orders = getPurchaseOrders();
+    const orders = await getPurchaseOrders();
     return NextResponse.json({ success: true, data: orders });
   } catch (error: any) {
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });
@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
         { status: 400 }
       );
     }
-    const order = createPurchaseOrder({
+    const order = await createPurchaseOrder({
       productId,
       quantity: Number(quantity),
       supplier,
@@ -42,7 +42,7 @@ export async function PATCH(req: NextRequest) {
         { status: 400 }
       );
     }
-    const result = receivePurchaseOrder(orderId);
+    const result = await receivePurchaseOrder(orderId);
     return NextResponse.json({ success: true, data: result });
   } catch (error: any) {
     return NextResponse.json({ success: false, error: error.message }, { status: 400 });

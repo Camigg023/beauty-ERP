@@ -3,7 +3,7 @@ import { getSales, recordSale } from '@/lib/db';
 
 export async function GET() {
   try {
-    const sales = getSales();
+    const sales = await getSales();
     return NextResponse.json({ success: true, data: sales });
   } catch (error: any) {
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });
@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
         { status: 400 }
       );
     }
-    const result = recordSale({
+    const result = await recordSale({
       productId,
       quantity: Number(quantity),
       channel: channel || 'TIENDA_ONLINE',

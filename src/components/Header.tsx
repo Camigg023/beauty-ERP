@@ -58,7 +58,7 @@ export function Header({ title, subtitle }: { title?: string; subtitle?: string 
             <Sparkles className="w-4 h-4" />
           </div>
           <span className="font-extrabold text-base bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
-            TRENDY ERP
+            BEAUTY ERP
           </span>
         </div>
       </div>

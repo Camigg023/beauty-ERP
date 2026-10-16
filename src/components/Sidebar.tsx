@@ -18,15 +18,20 @@ import {
 } from 'lucide-react';
 import { useApp } from '@/context/AppContext';
 import { LipstickIcon, BlushIcon, MascaraIcon } from './CosmeticIcons';
+import { authClient } from '@/lib/auth-client';
 
 export function Sidebar() {
   const pathname = usePathname();
   const router = useRouter();
+  const { data: authSession } = authClient.useSession();
   const { unreadAlertsCount, criticalAlertsCount, setNotificationModalOpen, showToast, refreshData } = useApp();
 
   const handleLogout = async () => {
     try {
-      await fetch('/api/auth', { method: 'DELETE' });
+      await Promise.all([
+        authClient.signOut(),
+        fetch('/api/auth', { method: 'DELETE' }),
+      ]);
       router.push('/login');
     } catch {
       router.push('/login');
@@ -97,7 +102,7 @@ export function Sidebar() {
           </div>
           <div>
             <h1 className="font-extrabold text-lg tracking-tight bg-gradient-to-r from-pink-600 via-fuchsia-600 to-purple-600 bg-clip-text text-transparent">
-              TRENDY ERP
+              BEAUTY ERP
             </h1>
             <p className="text-[11px] font-medium text-pink-600/70 dark:text-pink-400/80">
               Inventarios Cosméticos
@@ -203,11 +208,11 @@ export function Sidebar() {
         <div className="flex items-center justify-between pt-2">
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-pink-400 to-purple-500 flex items-center justify-center text-white font-bold text-xs shadow-md">
-              C
+              {authSession?.user.name?.charAt(0) || 'C'}
             </div>
             <div className="text-left">
-              <p className="text-xs font-bold text-slate-800 dark:text-slate-100">Camila G.</p>
-              <p className="text-[10px] text-slate-500 dark:text-slate-400">Admin Operaciones</p>
+              <p className="text-xs font-bold text-slate-800 dark:text-slate-100">{authSession?.user.name || 'Camila G.'}</p>
+              <p className="text-[10px] text-slate-500 dark:text-slate-400">{authSession?.user ? 'Cuenta Beauty ERP' : 'Admin Operaciones'}</p>
             </div>
           </div>
           <button

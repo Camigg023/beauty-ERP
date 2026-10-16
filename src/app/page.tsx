@@ -114,7 +114,7 @@ export default function DashboardPage() {
       <main className="flex-1 flex flex-col min-w-0 pb-16">
         <Header
           title="Panel General de Control (ERP)"
-          subtitle="Monitoreo de Inventario en Tiempo Real • Cosméticos Trendy"
+          subtitle="Monitoreo de Inventario en Tiempo Real • Cosméticos Beauty"
         />
 
         <div className="px-4 sm:px-8 py-6 space-y-8 max-w-7xl mx-auto w-full">
@@ -336,7 +336,7 @@ export default function DashboardPage() {
                         </div>
                         <div className="flex-1 min-w-0 text-xs">
                           <p className="font-semibold text-slate-700 dark:text-slate-200 truncate">
-                            Ref Trendy: {product.trendyInfo.referenceCode}
+                            Ref Beauty: {product.trendyInfo.referenceCode}
                           </p>
                           <p className="text-slate-500">
                             PVP: ${product.unitPriceCOP.toLocaleString('es-CO')} COP
@@ -347,7 +347,7 @@ export default function DashboardPage() {
                             rel="noreferrer"
                             className="text-[10px] text-pink-600 dark:text-pink-400 hover:underline flex items-center gap-0.5 mt-0.5"
                           >
-                            <span>Ver en tienda Trendy</span>
+                            <span>Ver en tienda Beauty</span>
                             <ExternalLink className="w-2.5 h-2.5" />
                           </a>
                         </div>

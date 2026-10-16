@@ -187,7 +187,7 @@ export default function ParametrosPage() {
                     required
                   />
                   <p className="text-[10px] text-slate-500">
-                    Tiempo que tarda Trendy en entregar (~{Math.round(formData.leadTimeWeeks * 7)} días)
+                    Tiempo que tarda Beauty en entregar (~{Math.round(formData.leadTimeWeeks * 7)} días)
                   </p>
                 </div>
 

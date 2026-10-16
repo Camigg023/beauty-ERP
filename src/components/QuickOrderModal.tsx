@@ -9,7 +9,7 @@ export function QuickOrderModal() {
   const { isOpen, product, quantity: initialQuantity } = quickOrderModal;
 
   const [quantity, setQuantity] = useState<number>(initialQuantity || 100);
-  const [supplier, setSupplier] = useState<string>('Trendy Cosméticos Colombia SAS');
+  const [supplier, setSupplier] = useState<string>('Beauty Cosméticos Colombia SAS');
   const [notes, setNotes] = useState<string>('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -149,7 +149,7 @@ export function QuickOrderModal() {
             </label>
             <input
               type="text"
-              placeholder="Ej. Prioridad alta por campaña Trendy de fin de mes"
+              placeholder="Ej. Prioridad alta por campaña Beauty de fin de mes"
               value={notes}
               onChange={e => setNotes(e.target.value)}
               className="w-full px-4 py-2 rounded-xl border border-pink-200 dark:border-pink-900 bg-white/80 dark:bg-slate-900/80 text-xs text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-pink-500"

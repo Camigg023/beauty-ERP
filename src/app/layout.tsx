@@ -6,7 +6,7 @@ import { QuickOrderModal } from '@/components/QuickOrderModal';
 import { ToastContainer } from '@/components/ToastContainer';
 
 export const metadata: Metadata = {
-  title: 'GLOW ERP | Gestión de Inventarios Cosméticos Trendy',
+  title: 'BEAUTY ERP | Gestión de Inventarios Cosméticos Beauty',
   description: 'ERP de inventarios con políticas (Q, R) y (s, S), EOQ, stock de seguridad y punto de reorden para marca de cosméticos.',
 };
 

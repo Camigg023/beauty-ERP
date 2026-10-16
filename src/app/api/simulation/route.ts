@@ -7,7 +7,7 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const { productId, policyOverride, demandNoise, initialStockOverride } = body;
 
-    const product = getProductById(productId);
+    const product = await getProductById(productId);
     if (!product) {
       return NextResponse.json({ success: false, error: 'Product not found' }, { status: 404 });
     }

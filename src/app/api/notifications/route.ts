@@ -3,7 +3,7 @@ import { getNotifications, resolveNotification } from '@/lib/db';
 
 export async function GET() {
   try {
-    const alerts = getNotifications();
+    const alerts = await getNotifications();
     return NextResponse.json({ success: true, data: alerts });
   } catch (error: any) {
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });
@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
     if (!id) {
       return NextResponse.json({ success: false, error: 'id is required' }, { status: 400 });
     }
-    const resolved = resolveNotification(id);
+    const resolved = await resolveNotification(id);
     return NextResponse.json({ success: true, resolved });
   } catch (error: any) {
     return NextResponse.json({ success: false, error: error.message }, { status: 400 });
